@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, FlatList} from 'react-native';
 
 import {Header} from "./components/Header";
 import {TodoItem} from "./components/TodoItem";
+import {AddTodos} from "./components/AddTodos";
 
 export default function App() {
 
@@ -10,17 +11,21 @@ export default function App() {
         {text: 'by coffee', key: 1},
         {text: 'create an app', key: 2},
         {text: 'play on the switch', key: 3},
-    ])
+    ]);
 
     const onDeleteTodo = (key) => {
         setTodos(todos.filter(todo => todo.key !== key))
-    }
+    };
+
+    const onAddTodo = (text) => {
+        setTodos([{text, key: Date.now().toString()}, ...todos]);
+    };
 
     return (
         <View style={styles.container}>
             <Header/>
             <View style={styles.content}>
-                {/*to form*/}
+                <AddTodos onAddTodo={onAddTodo} />
                 <View style={styles.list}>
                     <FlatList
                         data={todos}
