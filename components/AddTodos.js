@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {StyleSheet, View, TextInput, Button} from 'react-native';
+import {StyleSheet, View, TextInput, Button, Alert} from 'react-native';
 
 export const AddTodos = ({onAddTodo}) => {
     const [text, setText] = useState('');
@@ -9,6 +9,11 @@ export const AddTodos = ({onAddTodo}) => {
     };
 
     const addTodo = (text) => {
+        if (text.length < 2) {
+            return (
+                Alert.alert('Attention', 'Todo must have more then two symbols', [{text: 'Understood'}])
+            )
+        }
         onAddTodo(text);
         setText('');
     }
